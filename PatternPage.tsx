@@ -11,8 +11,8 @@ import {
   ExternalLink,
   ChevronRight
 } from 'lucide-react';
-import CodeBlock from '../components/CodeBlock';
-import { getPatternById, securityPatterns } from '../data/patterns';
+import CodeBlock from './CodeBlock';
+import { getPatternById, securityPatterns } from './patterns';
 
 const PatternPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -4,16 +4,13 @@ import {
   BookOpen, 
   Shield, 
   AlertTriangle, 
-  Code, 
-  Zap,
-  Lock,
   Eye,
   Target,
   CheckCircle,
   ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { securityPatterns } from '../data/patterns';
+import { securityPatterns } from './patterns';
 
 const DeepDivePage: React.FC = () => {
   const sections = [

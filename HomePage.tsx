@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, AlertTriangle, Code, BookOpen, Zap, Lock, Eye, Target } from 'lucide-react';
-import PatternCard from '../components/PatternCard';
-import { securityPatterns } from '../data/patterns';
+import PatternCard from './PatternCard';
+import { securityPatterns } from './patterns';
 
 const HomePage: React.FC = () => {
   const stats = [
