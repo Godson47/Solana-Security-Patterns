@@ -13,7 +13,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { securityPatterns } from '../data/patterns';
+import { securityPatterns } from './patterns';
 
 const DeepDivePage: React.FC = () => {
   const sections = [
