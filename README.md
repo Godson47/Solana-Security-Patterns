@@ -1,90 +1,61 @@
-# Solana Security Patterns - Smart Contracts
+# Solana Security Patterns
 
-This directory contains the smart contract examples demonstrating vulnerable vs secure patterns for Solana program development.
+An interactive React/Vite learning site that explains common Solana program security mistakes with vulnerable and safer code examples. The repository also includes Rust example snippets for study.
 
-## Structure
+> **Safety notice:** intentionally vulnerable examples are for education only. Never copy them into production programs or deploy them to a live network. The “secure” examples are illustrative and still require independent review, tests, and validation against the current Solana/Anchor APIs before real use.
 
-Each vulnerability pattern has two versions:
-- `vulnerable_*.rs` - The insecure implementation with detailed comments explaining the vulnerability
-- `secure_*.rs` - The fixed implementation with security measures explained
+## What is included
 
-## Patterns Included
+- React + TypeScript single-page application
+- Searchable/interactive pattern pages and code examples
+- Educational coverage of signer checks, account ownership and matching, arithmetic safety, PDA seeds, and cross-program invocation
+- Standalone Rust snippets for comparison
 
-### 1. Missing Signer Verification (`signer_check/`)
-- **Vulnerability**: Not verifying that critical accounts have signed the transaction
-- **Impact**: Unauthorized actions, fund theft
-- **Severity**: Critical
+This repository is currently a **front-end learning application**, not a complete Anchor workspace. There is no root `Anchor.toml`, Cargo workspace, or integrated validator test suite in the current tree, so `anchor build` and `anchor test` are not supported from this repository as-is.
 
-### 2. Missing Owner Verification (`owner_check/`)
-- **Vulnerability**: Not verifying account ownership before reading data
-- **Impact**: Fake account injection, data manipulation
-- **Severity**: Critical
+## Requirements
 
-### 3. Integer Overflow/Underflow (`arithmetic/`)
-- **Vulnerability**: Unchecked arithmetic operations
-- **Impact**: Balance manipulation, fund theft
-- **Severity**: Critical
+- Node.js 20 or newer
+- npm
 
-### 4. PDA Seed Collision (`pda_security/`)
-- **Vulnerability**: Predictable or insufficient PDA seeds
-- **Impact**: Account collision, unauthorized access
-- **Severity**: High
-
-### 5. Unsafe CPI (`cpi_security/`)
-- **Vulnerability**: Improper cross-program invocation handling
-- **Impact**: Reentrancy, privilege escalation
-- **Severity**: Critical
-
-### 6. Account Data Matching (`account_matching/`)
-- **Vulnerability**: Not verifying relationships between accounts
-- **Impact**: Account substitution, fund theft
-- **Severity**: High
-
-## Building
+## Local development
 
 ```bash
-# Install Anchor CLI
-cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
-
-# Build all programs
-anchor build
-
-# Run tests
-anchor test
+git clone https://github.com/Godson47/Solana-Security-Patterns.git
+cd Solana-Security-Patterns
+npm install
+npm run dev
 ```
 
-## Testing
+Vite prints the local URL after the development server starts.
 
-Each pattern includes tests that demonstrate:
-1. The vulnerability being exploited
-2. The secure version preventing the exploit
+## Build and type-check
 
 ```bash
-# Run specific pattern tests
-anchor test --skip-local-validator tests/signer_check.ts
+npm run type-check
+npm run build
+npm run preview
 ```
 
-## Usage
+The production bundle is written to `dist/`. Review the build output and test all routes in a browser before publishing. The browser router uses paths such as `/pattern/:id`; configure the hosting platform to serve `index.html` as a fallback for client-side routes.
 
-These contracts are for **educational purposes only**. Do not deploy vulnerable versions to any network.
+## Deployment
 
-When studying:
-1. Read the vulnerable code first
-2. Understand the attack vector
-3. Study the secure implementation
-4. Run the tests to see the difference
+The app can be hosted as a static site on services such as Vercel, Netlify, or Cloudflare Pages:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- No server-side secrets or environment variables are required by the current frontend
+
+Use HTTPS in production. Do not add API keys or private credentials to `VITE_*` variables; Vite exposes those values to browser code.
+
+## Security and maintenance
+
+- Treat every code sample as educational material, not a security audit or production-ready smart contract.
+- Validate account ownership, signer privileges, PDA derivation, account relationships, arithmetic, and CPI program IDs in real programs.
+- Pin and review dependency updates, and run the build and type-check after changes.
+- Keep generated output, dependency directories, local environment files, and archives out of source control.
 
 ## Contributing
 
-To add a new security pattern:
-1. Create a new directory under `contracts/`
-2. Add `vulnerable_*.rs` and `secure_*.rs`
-3. Include comprehensive comments
-4. Add tests demonstrating the vulnerability
-5. Update this README
-
-## Resources
-
-- [Anchor Documentation](https://www.anchor-lang.com/docs)
-- [Solana Security Best Practices](https://solana.com/docs/programs/security)
-- [Solana Account Model](https://solana.com/docs/core/accounts)
+Please include the affected pattern, its threat model, a minimal reproduction, and tests or validation steps when proposing changes. Clearly distinguish exploit demonstrations from mitigations.
