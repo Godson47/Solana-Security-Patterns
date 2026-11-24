@@ -4,7 +4,6 @@ import {
   BookOpen, 
   Shield, 
   AlertTriangle, 
-  Code, 
   Zap,
   Lock,
   Eye,
